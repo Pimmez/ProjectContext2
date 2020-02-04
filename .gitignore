@@ -2,6 +2,10 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+ Temp/
+ obj/
+ Build
+ Library/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -9,6 +13,24 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+
+  ExportedObj/
+     *.svd
+     *.userprefs
+     *.csproj
+     *.pidb
+     *.suo
+     *.sln
+     *.user
+     *.unityproj
+     *.booproj
+     *.orig
+     *.app
+     *.exe
+     *.*_data
+     
+     Build/iOS
+     Build/android
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
