@@ -5,6 +5,7 @@ using TMPro;
 
 public class CardLogic : MonoBehaviour
 {
+	public Card card;
 	public bool isMouseOver = false;
 	[SerializeField] private TextMeshProUGUI text;
 
@@ -16,15 +17,5 @@ public class CardLogic : MonoBehaviour
 	private void OnMouseExit()
 	{
 		isMouseOver = false;
-	}
-
-	public void InduceRight()
-	{
-		text.text = "You have swiped right!";
-	}
-
-	public void InduceLeft()
-	{
-		text.text = "You have swiped left!";
 	}
 }
