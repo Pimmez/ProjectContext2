@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ab1923d35c44f54d98006541e91f371, type: 3}
-  m_Name: Match
+  m_Name: Match 1
   m_EditorClassIdentifier: 
-  matchCardIcon: {fileID: 21300000, guid: 1b9a740b05286c349b73a096c34adf33, type: 3}
+  matchCardIcon: {fileID: 21300000, guid: 5e88d4273ac498e4c898536be33af805, type: 3}
   matchCardID: 0
-  matchCardName: GENDERFLUID
-  dialogue: Ik kan de vrouw of man zijn in de relatie, wat jij maar wil!
+  matchCardName: REDNECK
+  dialogue: Let's TRUMP this life together!
