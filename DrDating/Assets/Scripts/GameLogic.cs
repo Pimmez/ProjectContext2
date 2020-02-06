@@ -7,8 +7,11 @@ public class GameLogic : MonoBehaviour
 {
 	//GameObjects
 	[SerializeField] private GameObject cardGameObject;
-	[SerializeField] private CardLogic cardLogic;
+	[SerializeField] private GameObject cardOutlineGameObject;
 	[SerializeField] private SpriteRenderer cardSpriteRenderer;
+	[SerializeField] private SpriteRenderer outlineSpriteRenderer;
+	[SerializeField] private GameObject matchCardGameObject;
+	[SerializeField] private CardLogic cardLogic;
 	private ResourceManager resourceManager;
 
 	//Tweaking Variables
@@ -23,6 +26,11 @@ public class GameLogic : MonoBehaviour
 	[SerializeField] private TMP_Text characterDialogue;
 	[SerializeField] private TMP_Text actionDialogue;
 
+	//Match Card Variables
+	[SerializeField] private MatchCard currentMatchCard;
+	[SerializeField] private SpriteRenderer matchCardSpriteRenderer;
+	[SerializeField] private TMP_Text matchCardDialogue;
+
 	//Card Variables
 	[SerializeField] private Card currentCard;
 	private string leftQuote;
@@ -33,15 +41,20 @@ public class GameLogic : MonoBehaviour
 	private int scienceCounter = 0;
 	private int cardCounter;
 
+	private Vector2 cardTempPosition;
 
 	private void Awake()
 	{
 		resourceManager = GetComponent<ResourceManager>();
 		cardSpriteRenderer = cardGameObject.GetComponent<SpriteRenderer>();
+		outlineSpriteRenderer = cardOutlineGameObject.GetComponent<SpriteRenderer>();
+		matchCardSpriteRenderer = matchCardGameObject.GetComponent<SpriteRenderer>();
 	}
 
 	private void Start()
 	{
+		matchCardGameObject.SetActive(false);
+		cardTempPosition = gameObject.transform.position;
 		cardCounter = 0;
 		LoadCard(resourceManager.cards[cardCounter]);
 	}
@@ -63,8 +76,10 @@ public class GameLogic : MonoBehaviour
     {
 		//Dialogue Text Handeling
 		textColor.a = Mathf.Min((Mathf.Abs(cardGameObject.transform.position.x) - sideTrigger) / divideValue, 1);
+		outlineSpriteRenderer.color = Color.cyan;
 		if (cardGameObject.transform.position.x > sideTrigger)
-		{	
+		{
+			outlineSpriteRenderer.color = Color.green;
 			if (Input.GetMouseButtonUp(0))
 			{
 				currentCard.Right();
@@ -86,6 +101,8 @@ public class GameLogic : MonoBehaviour
 		}
 		else
 		{
+			outlineSpriteRenderer.color = Color.red;
+
 			if (Input.GetMouseButtonUp(0))
 			{
 				currentCard.Left();
@@ -104,7 +121,7 @@ public class GameLogic : MonoBehaviour
 		}
 		else
 		{
-			cardGameObject.transform.position = Vector2.MoveTowards(cardGameObject.transform.position, new Vector2(0, 0), bounceBackForce);
+			cardGameObject.transform.position = Vector2.MoveTowards(cardGameObject.transform.position, cardTempPosition, bounceBackForce);
 		}
 		
 		//UI
@@ -119,6 +136,12 @@ public class GameLogic : MonoBehaviour
 		rightQuote = _card.rightQuote;
 		currentCard = resourceManager.cards[cardCounter];
 		characterDialogue.text = _card.dialogue;
+	}
+
+	private void LoadMatchCard(MatchCard _matchCard)
+	{
+		matchCardSpriteRenderer.sprite = _matchCard.matchCardIcon;
+		matchCardDialogue.text = _matchCard.dialogue;
 	}
 
 	//Makes A Random Card Chain
@@ -145,6 +168,7 @@ public class GameLogic : MonoBehaviour
 		{
 			fakeNewsCounter++;
 		}
+		/*
 		if ((int)_card.cardTags == 2)
 		{
 			scienceCounter++;
@@ -153,6 +177,7 @@ public class GameLogic : MonoBehaviour
 		{
 			sustainabilityCounter++;
 		}
+		*/
 	}
 
 	private void DecreaseCountCardTags(Card _card)
@@ -165,6 +190,7 @@ public class GameLogic : MonoBehaviour
 		{
 			fakeNewsCounter--;
 		}
+		/*
 		if ((int)_card.cardTags == 2)
 		{
 			scienceCounter--;
@@ -173,16 +199,42 @@ public class GameLogic : MonoBehaviour
 		{
 			sustainabilityCounter--;
 		}
+		*/
 	}
 
+	//ONLY USE NEWS AND FAKENEWS - COUNTER
 	private void Matching()
 	{
 		cardGameObject.SetActive(false);
 		Debug.Log("newsCounter " + newsCounter);
 		Debug.Log("fakeNewsCounter " + fakeNewsCounter);
-		Debug.Log("ScienceCounter " + scienceCounter);
-		Debug.Log("SustainabilityCounter " + sustainabilityCounter);
 
 		Debug.Log("Initializing Matchup");
+
+		if(newsCounter > fakeNewsCounter)
+		{
+			DoMatchupNEWS();
+		}
+		else if(fakeNewsCounter > newsCounter)
+		{
+			DoMatchupFAKENEWS();
+		}
+		else
+		{
+			return;
+		}
+	}
+
+	//MAKE A SWITCH STATEMENT OUT OF THIS
+	private void DoMatchupNEWS()
+	{
+		matchCardGameObject.SetActive(true);
+		LoadMatchCard(resourceManager.matchCards[0]);
+	}
+
+	private void DoMatchupFAKENEWS()
+	{
+		matchCardGameObject.SetActive(true);
+		LoadMatchCard(resourceManager.matchCards[1]);
 	}
 }
