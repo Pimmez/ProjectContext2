@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ab1923d35c44f54d98006541e91f371, type: 3}
-  m_Name: Match
+  m_Name: Match 1
   m_EditorClassIdentifier: 
-  matchCardIcon: {fileID: 21300000, guid: f27bbfcb083863140bce7369adc8b095, type: 3}
+  matchCardIcon: {fileID: 21300000, guid: dc87c3a57485c1044847f079293fe2cb, type: 3}
   matchCardID: 0
   matchCardName: gekke man
-  dialogue: Wij behoren tot elkaar!
+  dialogue: Wauw wat een date!

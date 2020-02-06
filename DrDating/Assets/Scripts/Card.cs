@@ -8,8 +8,6 @@ public class Card : ScriptableObject
 	public string cardName;
 	public CardTags cardTags;
 	public string dialogue;
-	public string leftQuote;
-	public string rightQuote;
 
 	public void Right()
 	{

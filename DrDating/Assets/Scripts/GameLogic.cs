@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour
 {
@@ -12,7 +13,10 @@ public class GameLogic : MonoBehaviour
 	[SerializeField] private SpriteRenderer outlineSpriteRenderer;
 	[SerializeField] private GameObject matchCardGameObject;
 	[SerializeField] private CardLogic cardLogic;
+	[SerializeField] private SpriteRenderer mobileSpriteRenderer;
+	[SerializeField] private GameObject mobileBackgroundGameObject;
 	private ResourceManager resourceManager;
+	[SerializeField] private GameObject backgroundPhone;
 
 	//Tweaking Variables
 	[SerializeField] private float bounceBackForce = 1f;
@@ -24,7 +28,6 @@ public class GameLogic : MonoBehaviour
 	//UI
 	[SerializeField] private TMP_Text display;
 	[SerializeField] private TMP_Text characterDialogue;
-	[SerializeField] private TMP_Text actionDialogue;
 
 	//Match Card Variables
 	[SerializeField] private MatchCard currentMatchCard;
@@ -43,8 +46,13 @@ public class GameLogic : MonoBehaviour
 
 	private Vector2 cardTempPosition;
 
+	[SerializeField] private Sprite image1;
+	[SerializeField] private Sprite image2;
+
+
 	private void Awake()
 	{
+		mobileSpriteRenderer = mobileBackgroundGameObject.GetComponent<SpriteRenderer>();
 		resourceManager = GetComponent<ResourceManager>();
 		cardSpriteRenderer = cardGameObject.GetComponent<SpriteRenderer>();
 		outlineSpriteRenderer = cardOutlineGameObject.GetComponent<SpriteRenderer>();
@@ -53,23 +61,12 @@ public class GameLogic : MonoBehaviour
 
 	private void Start()
 	{
+		backgroundPhone.SetActive(true);
+		mobileSpriteRenderer.sprite = image1; 
 		matchCardGameObject.SetActive(false);
 		cardTempPosition = gameObject.transform.position;
 		cardCounter = 0;
 		LoadCard(resourceManager.cards[cardCounter]);
-	}
-
-	private void UpdateDialogue()
-	{
-		actionDialogue.color = textColor;
-		if (cardGameObject.transform.position.x < 0)
-		{
-			actionDialogue.text = leftQuote;
-		}
-		else
-		{
-			actionDialogue.text = rightQuote;
-		}
 	}
 
 	private void Update()
@@ -111,8 +108,6 @@ public class GameLogic : MonoBehaviour
 			}
 		}
 
-		UpdateDialogue();
-
 		//Movement
 		if (Input.GetMouseButton(0) && cardLogic.isMouseOver)
 		{
@@ -132,8 +127,6 @@ public class GameLogic : MonoBehaviour
 	private void LoadCard(Card _card)
 	{
 		cardSpriteRenderer.sprite = _card.cardIcon;
-		leftQuote = _card.leftQuote;
-		rightQuote = _card.rightQuote;
 		currentCard = resourceManager.cards[cardCounter];
 		characterDialogue.text = _card.dialogue;
 	}
@@ -228,12 +221,16 @@ public class GameLogic : MonoBehaviour
 	//MAKE A SWITCH STATEMENT OUT OF THIS
 	private void DoMatchupNEWS()
 	{
+		backgroundPhone.SetActive(false);
+		mobileSpriteRenderer.sprite = image2;
 		matchCardGameObject.SetActive(true);
 		LoadMatchCard(resourceManager.matchCards[0]);
 	}
 
 	private void DoMatchupFAKENEWS()
 	{
+		backgroundPhone.SetActive(false);
+		mobileSpriteRenderer.sprite = image2;
 		matchCardGameObject.SetActive(true);
 		LoadMatchCard(resourceManager.matchCards[1]);
 	}
