@@ -6,39 +6,44 @@ using TMPro;
 public class GameLogic : MonoBehaviour
 {
 	//GameObjects
-	public GameObject cardGameObject;
-	public CardLogic cardLogic;
-	public SpriteRenderer cardSpriteRenderer;
-	public ResourceManager resourceManager;
+	[SerializeField] private GameObject cardGameObject;
+	[SerializeField] private CardLogic cardLogic;
+	[SerializeField] private SpriteRenderer cardSpriteRenderer;
+	private ResourceManager resourceManager;
 
 	//Tweaking Variables
-	public float bounceBackForce = 1f;
-	public float sideMargin = 0.5f;
-	public float sideTrigger = 2f;
-	private float alphaText;
+	[SerializeField] private float bounceBackForce = 1f;
+	[SerializeField] private float sideMargin = 0.5f;
+	[SerializeField] private float sideTrigger = 2f;
+	[SerializeField] private float divideValue = 3f;
 	private Color textColor;
-	private Vector3 pos;
-	public float divideValue = 3f;
 
 	//UI
-	public TMP_Text display;
-	public TMP_Text characterDialogue;
-	public TMP_Text actionDialogue;
+	[SerializeField] private TMP_Text display;
+	[SerializeField] private TMP_Text characterDialogue;
+	[SerializeField] private TMP_Text actionDialogue;
 
 	//Card Variables
+	[SerializeField] private Card currentCard;
 	private string leftQuote;
 	private string rightQuote;
-	public Card currentCard;
-	public Card testCard;
+	private int newsCounter = 0;
+	private int sustainabilityCounter = 0;
+	private int fakeNewsCounter = 0;
+	private int scienceCounter = 0;
+	private int cardCounter;
+
 
 	private void Awake()
 	{
+		resourceManager = GetComponent<ResourceManager>();
 		cardSpriteRenderer = cardGameObject.GetComponent<SpriteRenderer>();
 	}
 
 	private void Start()
 	{
-		LoadCard(testCard);
+		cardCounter = 0;
+		LoadCard(resourceManager.cards[cardCounter]);
 	}
 
 	private void UpdateDialogue()
@@ -63,6 +68,7 @@ public class GameLogic : MonoBehaviour
 			if (Input.GetMouseButtonUp(0))
 			{
 				currentCard.Right();
+				IncreaseCountCardTags(resourceManager.cards[cardCounter]);
 				NewCard();
 			}
 		}
@@ -83,6 +89,7 @@ public class GameLogic : MonoBehaviour
 			if (Input.GetMouseButtonUp(0))
 			{
 				currentCard.Left();
+				DecreaseCountCardTags(resourceManager.cards[cardCounter]);
 				NewCard();
 			}
 		}
@@ -99,23 +106,83 @@ public class GameLogic : MonoBehaviour
 		{
 			cardGameObject.transform.position = Vector2.MoveTowards(cardGameObject.transform.position, new Vector2(0, 0), bounceBackForce);
 		}
+		
 		//UI
 		display.text = "" + textColor;
     }
 
-	public void LoadCard(Card _card)
+	//Defines The Card:ScriptableObject
+	private void LoadCard(Card _card)
 	{
-		//cardSpriteRenderer.sprite = resourceManager.sprites[(int)_card.cardSprite];
 		cardSpriteRenderer.sprite = _card.cardIcon;
 		leftQuote = _card.leftQuote;
 		rightQuote = _card.rightQuote;
-		currentCard = testCard;
+		currentCard = resourceManager.cards[cardCounter];
 		characterDialogue.text = _card.dialogue;
 	}
 
-	public void NewCard()
+	//Makes A Random Card Chain
+	private void NewCard()
 	{
-		int rollDice = Random.Range(0, resourceManager.cards.Length);
-		LoadCard(resourceManager.cards[rollDice]);
+		if(cardCounter == resourceManager.cards.Length -1)
+		{
+			Matching();
+		}
+		else
+		{
+			cardCounter++;
+			LoadCard(resourceManager.cards[cardCounter]);
+		}
+	}
+
+	private void IncreaseCountCardTags(Card _card)
+	{
+		if((int)_card.cardTags == 0)
+		{
+			newsCounter++;
+		}
+		if ((int)_card.cardTags == 1)
+		{
+			fakeNewsCounter++;
+		}
+		if ((int)_card.cardTags == 2)
+		{
+			scienceCounter++;
+		}
+		if ((int)_card.cardTags == 3)
+		{
+			sustainabilityCounter++;
+		}
+	}
+
+	private void DecreaseCountCardTags(Card _card)
+	{
+		if ((int)_card.cardTags == 0)
+		{
+			newsCounter--;
+		}
+		if ((int)_card.cardTags == 1)
+		{
+			fakeNewsCounter--;
+		}
+		if ((int)_card.cardTags == 2)
+		{
+			scienceCounter--;
+		}
+		if ((int)_card.cardTags == 3)
+		{
+			sustainabilityCounter--;
+		}
+	}
+
+	private void Matching()
+	{
+		cardGameObject.SetActive(false);
+		Debug.Log("newsCounter " + newsCounter);
+		Debug.Log("fakeNewsCounter " + fakeNewsCounter);
+		Debug.Log("ScienceCounter " + scienceCounter);
+		Debug.Log("SustainabilityCounter " + sustainabilityCounter);
+
+		Debug.Log("Initializing Matchup");
 	}
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu]
 public class Card : ScriptableObject
@@ -8,7 +6,7 @@ public class Card : ScriptableObject
 	public Sprite cardIcon;
 	public int cardID;
 	public string cardName;
-	public CardSprite cardSprite;
+	public CardTags cardTags;
 	public string dialogue;
 	public string leftQuote;
 	public string rightQuote;
@@ -24,9 +22,10 @@ public class Card : ScriptableObject
 	}
 }
 
-public enum CardSprite
+public enum CardTags
 {
-	MAN,
-	WOMAN,
-	KNIGHT
+	NEWS,
+	FAKENEWS,
+	Science,
+	Sustainability
 }

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1923d35c44f54d98006541e91f371, type: 3}
+  m_Name: Match
+  m_EditorClassIdentifier: 
+  matchCardIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  matchCardID: 0
+  matchCardName: gekke man
+  dialogue: Wij behoren tot elkaar!

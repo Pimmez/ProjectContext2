@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1a24d5c978b3894ca5baa097019ec08, type: 3}
-  m_Name: GenericKnight 1
+  m_Name: woman1
   m_EditorClassIdentifier: 
   cardIcon: {fileID: 21300000, guid: dc87c3a57485c1044847f079293fe2cb, type: 3}
   cardID: 0
-  cardName: Generic Knight
-  cardSprite: 2
-  dialogue: Vaccineren is Fout
+  cardName: woman1
+  cardTags: 0
+  dialogue: Vrouwen hebben andere prioriteiten voor wetenschap dan mannen
   leftQuote: Daar ben ik niet mee eens
   rightQuote: JAA, dat klopt!

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1a24d5c978b3894ca5baa097019ec08, type: 3}
-  m_Name: Knight2
+  m_Name: man1
   m_EditorClassIdentifier: 
-  cardIcon: {fileID: 21300000, guid: dc87c3a57485c1044847f079293fe2cb, type: 3}
+  cardIcon: {fileID: 21300000, guid: f27bbfcb083863140bce7369adc8b095, type: 3}
   cardID: 0
-  cardName: Generic Knight
-  cardSprite: 2
-  dialogue: CO2 warmt de aarde op
-  leftQuote: Dat is niet waar!
-  rightQuote: Daar heb je gelijk in
+  cardName: man1
+  cardTags: 0
+  dialogue: Zure regen en waldsterben blijken onzin te zijn
+  leftQuote: Daar ben ik niet mee eens
+  rightQuote: dat is waar!
