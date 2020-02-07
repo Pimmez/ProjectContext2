@@ -43,6 +43,10 @@ public class GameLogic : MonoBehaviour
 	private int fakeNewsCounter = 0;
 	private int scienceCounter = 0;
 	private int cardCounter;
+	[SerializeField] private Color outlineColor;
+	[SerializeField] private Color outlineColorLeft;
+	[SerializeField] private Color outlineColorRight;
+
 
 	private Vector2 cardTempPosition;
 
@@ -73,10 +77,10 @@ public class GameLogic : MonoBehaviour
     {
 		//Dialogue Text Handeling
 		textColor.a = Mathf.Min((Mathf.Abs(cardGameObject.transform.position.x) - sideTrigger) / divideValue, 1);
-		outlineSpriteRenderer.color = Color.cyan;
+		outlineSpriteRenderer.color = outlineColor;
 		if (cardGameObject.transform.position.x > sideTrigger)
 		{
-			outlineSpriteRenderer.color = Color.green;
+			outlineSpriteRenderer.color = outlineColorRight;
 			if (Input.GetMouseButtonUp(0))
 			{
 				currentCard.Right();
@@ -98,7 +102,7 @@ public class GameLogic : MonoBehaviour
 		}
 		else
 		{
-			outlineSpriteRenderer.color = Color.red;
+			outlineSpriteRenderer.color = outlineColorLeft;
 
 			if (Input.GetMouseButtonUp(0))
 			{
