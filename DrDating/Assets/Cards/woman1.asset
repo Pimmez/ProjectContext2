@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a24d5c978b3894ca5baa097019ec08, type: 3}
   m_Name: woman1
   m_EditorClassIdentifier: 
-  cardIcon: {fileID: 21300000, guid: 27ba6386108dfcf4e87282dc7fb96368, type: 3}
+  cardIcon: {fileID: 21300000, guid: e716047f43d74f041b2e6bee81beae1e, type: 3}
   cardID: 0
-  cardName: woman1
-  cardTags: 1
-  dialogue: Vrouwen hebben andere prioriteiten voor wetenschap dan mannen
+  cardName: ASIANGLUTTON
+  cardTags: 0
+  dialogue: Ik was gisteren dronken geworden door vijf 0% biertjes.
+  leftQuote: Daar ben ik niet mee eens
+  rightQuote: JAA, dat klopt!
